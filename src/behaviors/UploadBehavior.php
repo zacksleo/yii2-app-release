@@ -4,11 +4,6 @@ namespace zacksleo\yii2\apprelease\behaviors;
 
 class UploadBehavior extends \mongosoft\file\UploadBehavior
 {
-    public function afterUpload()
-    {
-
-    }
-
     public function beforeSave()
     {
         parent::beforeSave();
