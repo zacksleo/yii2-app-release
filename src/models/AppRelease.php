@@ -108,5 +108,4 @@ class AppRelease extends \yii\db\ActiveRecord
         unset($fields['id'], $fields['created_at'], $fields['status'], $fields['updated_at']);
         return $fields;
     }
-
 }
