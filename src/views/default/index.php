@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'url',
                 'format' => 'url',
                 'value' => function ($model) {
-                    return $model->url;
+                    return $model->getUploadUrl('url');
                 },
             ],
             'md5',

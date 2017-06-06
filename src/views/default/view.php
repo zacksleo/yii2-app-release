@@ -1,11 +1,11 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use zacksleo\yii2\lookup\models\Lookup;
-use common\helpers\files\File;
+use zacksleo\yii2\apprelease\models\AppRelease;
+use zacksleo\yii2\apprelease\Module;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AppRelease */
+/* @var $model zacksleo\yii2\apprelease\models\AppRelease */
 $this->title = $model->version;
 $this->params['breadcrumbs'][] = ['label' => 'App发布', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'url',
                 'format' => 'url',
                 'value' => function ($model) {
-                    return File::getLink($model->url);
+                    return $model->getUploadUrl('url');
                 },
             ],
             'md5',
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
-                    return Lookup::item('ReleaseStatus', $model->status);
+                    return $model->status = AppRelease::STATUS_PUBLISHED ? Module::t('apprelease', 'published') : Module::t('apprelease', 'unpublished');
                 }
             ],
             'description',

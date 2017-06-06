@@ -8,7 +8,7 @@ use yii\helpers\Url;
 use yii\web\UploadedFile;
 use yii\behaviors\TimestampBehavior;
 use zacksleo\yii2\apprelease\Module;
-use mongosoft\file\UploadBehavior;
+use zacksleo\yii2\apprelease\behaviors\UploadBehavior;
 
 /**
  * This is the model class for table "{{%app_release}}".
@@ -47,7 +47,8 @@ class AppRelease extends \yii\db\ActiveRecord
             [['version', 'description'], 'required'],
             [['is_forced', 'status'], 'integer'],
             [['is_forced', 'status'], 'default', 'value' => 1],
-            [['md5', 'description', 'version'], 'string', 'max' => 255],
+            [['description', 'version'], 'string', 'max' => 255],
+            ['md5', 'string', 'max' => 255, 'on' => ['save']],
             [['url'], 'file',
                 //'extensions' => 'apk',
                 'skipOnEmpty' => true,
@@ -91,8 +92,8 @@ class AppRelease extends \yii\db\ActiveRecord
                 'class' => UploadBehavior::className(),
                 'attribute' => 'url',
                 'scenarios' => ['insert', 'update'],
-                'path' => '@webroot/web/uploads/apps',
-                'url' => '@web/uploads/apps'
+                'path' => '@frontend/web/uploads/apps',
+                'url' => Url::to('/uploads/apps', true),
             ],
         ];
     }
@@ -101,17 +102,11 @@ class AppRelease extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
         $fields['url'] = function () {
-            $url = Url::to(['file/view', 'filepath' => $this->url], true);
-            return str_replace('api', 'health', $url);
+            $url = Url::to(['file/view', 'path' => $this->getUploadPath('url')], true);
+            return $url;
         };
         unset($fields['id'], $fields['created_at'], $fields['status'], $fields['updated_at']);
         return $fields;
     }
 
-
-    public function afterSave($insert, $changedAttributes)
-    {
-        // $this->md5 = md5_file($this->url);
-        parent::afterSave($insert, $changedAttributes);
-    }
 }
