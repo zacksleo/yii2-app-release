@@ -52,9 +52,9 @@ class AppRelease extends \yii\db\ActiveRecord
             [['url'], 'file',
                 //'extensions' => 'apk',
                 'skipOnEmpty' => true,
-                'tooBig' => 'app文件大小不超过20M',
+                'tooBig' => 'app文件大小不超过120M',
                 'maxFiles' => 1,
-                'maxSize' => 200000000,
+                'maxSize' => 120*1024*1024,
                 'on' => ['insert', 'update']
             ],
         ];
