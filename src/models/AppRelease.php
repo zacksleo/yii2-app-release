@@ -93,7 +93,7 @@ class AppRelease extends \yii\db\ActiveRecord
                 'attribute' => 'url',
                 'scenarios' => ['insert', 'update'],
                 'path' => '@frontend/web/uploads/apps',
-                'url' => Url::to('/uploads/apps', true),
+                'url' => '@web/uploads/apps',
             ],
         ];
     }
@@ -102,7 +102,7 @@ class AppRelease extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
         $fields['url'] = function () {
-            $path = str_replace('api/uploads/', '', $this->getUploadUrl('img'));
+            $path = str_replace('api/uploads/', '', $this->getUploadUrl('url'));
             if (isset($_ENV['API_HOST'])) {
                 $url = $_ENV['API_HOST'] . 'files/' . $path;
             } else {
