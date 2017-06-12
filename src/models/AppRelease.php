@@ -54,7 +54,7 @@ class AppRelease extends \yii\db\ActiveRecord
                 'skipOnEmpty' => true,
                 'tooBig' => 'app文件大小不超过120M',
                 'maxFiles' => 1,
-                'maxSize' => 120*1024*1024,
+                'maxSize' => 120 * 1024 * 1024,
                 'on' => ['insert', 'update']
             ],
         ];
@@ -102,7 +102,12 @@ class AppRelease extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
         $fields['url'] = function () {
-            $url = Url::to(['file/view', 'path' => $this->getUploadPath('url')], true);
+            $path = str_replace('api/uploads/', '', $this->getUploadUrl('img'));
+            if (isset($_ENV['API_HOST'])) {
+                $url = $_ENV['API_HOST'] . 'files/' . $path;
+            } else {
+                $url = Url::to(['file/view', 'path' => $path], true);
+            }
             return $url;
         };
         unset($fields['id'], $fields['created_at'], $fields['status'], $fields['updated_at']);
