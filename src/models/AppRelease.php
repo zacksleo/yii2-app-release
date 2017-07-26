@@ -2,7 +2,6 @@
 
 namespace zacksleo\yii2\apprelease\models;
 
-use common\helpers\files\File;
 use Yii;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
@@ -22,7 +21,7 @@ use zacksleo\yii2\apprelease\behaviors\UploadBehavior;
  * @property string $description
  * @property integer $created_at
  * @property integer $updated_at
- * @property UploadedFile $releaseFile
+ * @property UploadedFile $file
  */
 class AppRelease extends \yii\db\ActiveRecord
 {
