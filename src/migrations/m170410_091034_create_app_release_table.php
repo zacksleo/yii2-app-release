@@ -21,7 +21,7 @@ class m170410_091034_create_app_release_table extends Migration
             'version' => $this->string()->notNull()->comment('版本号'),
             'is_forced' => $this->boolean()->notNull()->defaultValue(1)->comment('强制更新'),
             'url' => $this->string()->notNull()->comment('下载地址'),
-            'md5' => $this->string()->notNull()->comment('MD5'),
+            'md5' => $this->string()->notNull()->defaultValue('')->comment('MD5'),
             'status' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('状态'),
             'description' => $this->string()->notNull()->comment('发布说明'),
             'created_at' => $this->integer()->notNull()->comment('创建时间'),
