@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use zacksleo\yii2\apprelease\models\AppRelease;
@@ -18,7 +19,7 @@ YiiAsset::register($this);
         <?= Html::a('删除', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('yii','Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -42,7 +43,8 @@ YiiAsset::register($this);
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
-                    return $model->status = AppRelease::STATUS_PUBLISHED ? Module::t('apprelease', 'published') : Module::t('apprelease', 'unpublished');
+                    return $model->status = AppRelease::STATUS_PUBLISHED ? Module::t('apprelease',
+                        'published') : Module::t('apprelease', 'unpublished');
                 }
             ],
             'description',
