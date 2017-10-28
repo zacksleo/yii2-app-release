@@ -3,20 +3,22 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use zacksleo\yii2\apprelease\models\AppRelease;
 use zacksleo\yii2\apprelease\Module;
+use yii\web\YiiAsset;
 
 /* @var $this yii\web\View */
 /* @var $model zacksleo\yii2\apprelease\models\AppRelease */
 $this->title = $model->version;
 $this->params['breadcrumbs'][] = ['label' => 'App发布', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+YiiAsset::register($this);
 ?>
 <div class="app-release-view">
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('删除', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => Yii::t('yii','Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -37,7 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'md5',
-            'status',
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
@@ -45,8 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'description',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 </div>
