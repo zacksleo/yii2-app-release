@@ -112,4 +112,12 @@ class AppRelease extends \yii\db\ActiveRecord
         unset($fields['id'], $fields['created_at'], $fields['status'], $fields['updated_at']);
         return $fields;
     }
+
+    public static function getStatusList()
+    {
+        return [
+            self::STATUS_UNPUBLISHED => Module::t('apprelease', 'unpublished'),
+            self::STATUS_PUBLISHED => Module::t('apprelease', 'published'),
+        ];
+    }
 }

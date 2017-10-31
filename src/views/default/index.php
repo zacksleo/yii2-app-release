@@ -1,8 +1,10 @@
 <?php
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use zacksleo\yii2\apprelease\Module;
+use zacksleo\yii2\apprelease\models\AppRelease;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -31,11 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->getUploadUrl('url');
                 },
             ],
-            'md5',
-            // 'status',
-            // 'description',
-            // 'created_at',
-            // 'updated_at',
+            [
+                'attribute' => 'status',
+                'value' => function ($model) {
+                    return AppRelease::getStatusList()[$model->status];
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

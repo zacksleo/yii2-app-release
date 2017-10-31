@@ -43,8 +43,7 @@ YiiAsset::register($this);
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
-                    return $model->status = AppRelease::STATUS_PUBLISHED ? Module::t('apprelease',
-                        'published') : Module::t('apprelease', 'unpublished');
+                    return AppRelease::getStatusList()[$model->status];
                 }
             ],
             'description',

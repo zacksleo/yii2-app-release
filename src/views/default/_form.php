@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use kartik\file\FileInput;
@@ -34,10 +35,7 @@ use zacksleo\yii2\apprelease\Module;
             'overwriteInitial' => false,
         ]
     ])->hint('在此上传APK文件'); ?>
-    <?= $form->field($model, 'status')->inline(true)->textInput()->radioList([
-        AppRelease::STATUS_UNPUBLISHED => Module::t('apprelease', 'unpublished'),
-        AppRelease::STATUS_PUBLISHED => Module::t('apprelease', 'published'),
-    ], [
+    <?= $form->field($model, 'status')->inline(true)->textInput()->radioList(AppRelease::getStatusList(), [
         'default' => 1
     ]) ?>
     <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
