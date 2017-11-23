@@ -10,7 +10,7 @@ class LatestAction extends Action
 {
     public function run()
     {
-        $model = AppRelease::find()->orderBy('updated_at DESC')->one();
+        $model = AppRelease::find()->orderBy('updated_at DESC')->where(['status' => AppRelease::STATUS_PUBLISHED])->one();
         if (empty($model)) {
             throw new NotFoundHttpException('暂无新的更新');
         }
